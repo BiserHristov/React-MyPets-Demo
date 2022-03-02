@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { Routes, Route, useParams } from 'react-router-dom';
+
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import './App.css';
+import Categories from './components/Categories/Categories';
+import All from './components/Categories/CategoryElements/All';
+import Cats from './components/Categories/CategoryElements/Cats';
+import Dogs from './components/Categories/CategoryElements/Dogs';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+      <Routes>
+        <Route path='/' element={<Categories />} >
+          <Route path='categories/:category' element={<Categories />} />
+          {/* <Route path='categories/cats' element={<Cats />} />
+          <Route path='categories/dogs' element={<Dogs />} /> */}
+        </Route>
+      </Routes>
+      <h1>Hello World!!!!</h1>
+      <Footer />
     </div>
   );
 }
