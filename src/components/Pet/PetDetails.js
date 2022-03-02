@@ -9,7 +9,7 @@ const PetDetails = () => {
     useEffect(() => {
         petService.getOne(petId)
             .then(res => setPet(res))
-    }, )
+    }, [petId])
 
     return (
 
