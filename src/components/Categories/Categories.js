@@ -32,8 +32,9 @@ class Categories extends Component {
 
         petsService.getAll(category)
             .then(res => {
-                this.setState({ pets: res, currentCategory: category })
+                this.setState({ pets: res })
             })
+
     }
 
     render() {

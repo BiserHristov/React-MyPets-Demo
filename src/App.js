@@ -4,9 +4,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import './App.css';
 import Categories from './components/Categories/Categories';
-import All from './components/Categories/CategoryElements/All';
-import Cats from './components/Categories/CategoryElements/Cats';
-import Dogs from './components/Categories/CategoryElements/Dogs';
+import PetDetails from './components/Pet/PetDetails';
 
 function App() {
   return (
@@ -15,11 +13,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Categories />} >
           <Route path='categories/:category' element={<Categories />} />
-          {/* <Route path='categories/cats' element={<Cats />} />
-          <Route path='categories/dogs' element={<Dogs />} /> */}
         </Route>
+        <Route path='pets/details/:petId' element={<PetDetails />} />
       </Routes>
-      <h1>Hello World!!!!</h1>
       <Footer />
     </div>
   );
