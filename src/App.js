@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer';
 import './App.css';
 import Categories from './components/Categories/Categories';
 import PetDetails from './components/Pet/PetDetails';
+import DemoPage from './components/Demo';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           <Route path='categories/:category' element={<Categories />} />
         </Route>
         <Route path='pets/details/:petId' element={<PetDetails />} />
+        <Route path='demo' element={<DemoPage/>} />
+
       </Routes>
       <Footer />
     </div>
