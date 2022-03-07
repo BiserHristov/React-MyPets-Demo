@@ -3,7 +3,7 @@ import { Outlet, useParams } from 'react-router-dom'
 
 import * as petsService from '../../services/petsService'
 
-import Pet from '../Pet/Pet'
+import PetCard from '../PetCard/PetCard'
 import withRouter from '../withRouter'
 import CategoryNavigation from './CategoryNavigation/CategoryNavigation'
 
@@ -51,7 +51,7 @@ class Categories extends Component {
 
                     <ul className="other-pets-list">
 
-                        {this.state.pets.map(p => <Pet
+                        {this.state.pets.map(p => <PetCard
                             key={p.id}
                             pet={p}
                         />)}
