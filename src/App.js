@@ -8,6 +8,7 @@ import PetDetails from './components/PetCard/PetDetails';
 import DemoPage from './components/Demo';
 import CreatePet from './components/CreatePet/CreatePet';
 import EditPetDetails from './components/EditPetDetails/EditPetDetails';
+import EditPet from './components/EditPet/EditPet';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         </Route>
         <Route path='pets/:petId/details' element={<PetDetails />} />
         <Route path='pets/:petId/edit' element={<EditPetDetails />} />
+        <Route path='pets/details/:petId/edit' element={<EditPet />} />
+
         <Route path='pets/create' element={<CreatePet />} />
 
 

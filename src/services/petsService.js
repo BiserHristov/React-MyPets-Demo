@@ -25,7 +25,8 @@ export const create = (name, description, imageURL, category) => {
         name: name,
         description: description,
         imageURL: imageURL,
-        category: category
+        category: category,
+        likes: 0
     }
 
     return fetch(url, {
@@ -37,7 +38,7 @@ export const create = (name, description, imageURL, category) => {
     })
 };
 
-export const edit = (petId, description) => {
+export const update = (petId, description) => {
     let pet = {
         id: petId,
         description: description
@@ -50,4 +51,22 @@ export const edit = (petId, description) => {
         },
         body: JSON.stringify(pet)
     })
+}
+
+export const updateCounter = (petId, incrementedLikes) => {
+
+    let pet = {
+        id: petId,
+        likes: incrementedLikes
+    }
+  
+
+    return fetch(url + `/${petId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pet)
+    })
+        .then(res => res.json())
 }

@@ -1,33 +1,20 @@
 import { useNavigate } from 'react-router-dom';
 import { create } from '../../services/petsService'
 
-const CreatePet = () => {
-
-    let navigate = useNavigate();
-
-    const onCreatePetSubmitHandler = (e) => {
-        e.preventDefault();
-        create(
-            e.target.name.value,
-            e.target.description.value,
-            e.target.imageURL.value,
-            e.target.category.value,
-        )
-            .then(() => {
-                return navigate('/');
-            })
-
-    }
-
+const PetFormView = ({
+    onSubmitHandler,
+    petName,
+    setPetName
+}) => {
     return (
         <section className="create">
-            <form onSubmit={onCreatePetSubmitHandler}>
+            <form onSubmit={onSubmitHandler}>
                 <fieldset>
                     <legend>Add new Pet</legend>
                     <p className="field">
                         <label htmlFor="name">Name</label>
                         <span className="input">
-                            <input type="text" name="name" id="name" placeholder="Name" />
+                            <input type="text" name="name" id="name" placeholder="Name" value={petName} onChange={(e) => setPetName(e.target.value)} />
                             <span className="actions"></span>
                         </span>
                     </p>
@@ -64,6 +51,7 @@ const CreatePet = () => {
             </form>
         </section>
     )
+
 }
 
-export default CreatePet
+export default PetFormView

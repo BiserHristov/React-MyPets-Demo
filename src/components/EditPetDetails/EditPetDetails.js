@@ -17,7 +17,7 @@ const EditPetDetails = () => {
 
     const onDescriptionSaveSubmit = (e) => {
         e.preventDefault();
-        petService.edit(pet.id, e.target.description.value)
+        petService.update(pet.id, e.target.description.value)
             .then(res => navigate(`/pets/${petId}/details`))
     }
 
