@@ -1,77 +1,58 @@
-import React, { Component } from "react";
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const options = [
-    { label: 'IT', value: 'it' },
-    { label: 'Engineer', value: 'engineer' },
-    { label: 'Unemployed', value: 'unemployed' },
+const DemoPage = () => {
+    const onButtonClickHandler = () => {
+        console.log('Increase');
+        console.log(state.step);
+        console.log(Number(state.step));
+        setState(oldState => ({ ...oldState, count: oldState.count + Number(oldState.step) }))
+    }
+    
+    const [state, setState] = useState({
+        count: 11,
+        step: 1
+    })
 
-]
+    const [character, setCharacter] = useState({ name: 'Noboody' })
 
-class DemoPage extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: "Pesho",
-            bio: 'Lorem Ipsum',
-            occupation: "unemployed"
-        }
+    useEffect(() => {
+        fetch(`https://swapi.dev/api/people/${state.step}`)
+            .then(res => res.json())
+            .then(result => setCharacter(result))
 
-        this.emailInput = React.createRef();
+    }, [state.step])
 
-        this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    useEffect(() => {
+        return () => {
+            console.log("ComponentWillUnmount!!!!!!");
+        };
+    }, []);
 
+   
+
+    const onStepSelectChangehandler = (e) => {
+
+        setState(oldState => ({ ...oldState, step: Number(e.target.value) }))
     }
 
-    onSubmitHandler(e) {
-        e.preventDefault();
-
-        console.log(this.state)
-        console.log(this.emailInput.current.value)
-
-    }
-    // onUsernameChangeHandler(e) {
-    //     this.setState({ username: e.target.value })
-    // }
-
-    onChangeHandler(e) {
-        this.setState({ [e.target.name]: e.target.value })
-    }
-
-    render() {
-        return (
+    return (
+        <div>
+            <h1>{character.name} - Counter</h1>
+            <div>{state.count}</div>
+            <button onClick={onButtonClickHandler}>Increment</button>
+            <label htmlFor='step'>Step:</label>
+            <select name='step' id='step' onChange={onStepSelectChangehandler}>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+            </select>
             <div>
-                <h1>Demo form:</h1>
-                <form onSubmit={this.onSubmitHandler}>
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" name="username" value={this.state.username} onChange={this.onChangeHandler} />
-
-                    <label htmlFor="age">Number:</label>
-                    <input type="number" id="age" name="age" />
-
-                    <label htmlFor="bio">Bio:</label>
-                    <textarea name="bio" id="bio" value={this.state.bio} onChange={this.onChangeHandler}></textarea>
-
-                    <label htmlFor="occupation">Dropdown:</label>
-                    <select name="occupation" id="occupation" value={this.state.occupation} onChange={this.onChangeHandler}>
-                        {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
-                        {/* <option value="it">IT</option>
-                        <option value="engineer">Engineer</option>
-                        <option value="unemployed"  >Unemployed</option> */}
-                    </select>
-                    
-                    <label htmlFor="email">Email</label>
-                    <input
-                        ref={this.emailInput}
-                        type="email"
-                        id="email"
-                        placeholder="examle@pesho.com"
-                    />
-                    <input type="submit" value="Register" />
-                </form>
+                <Link to='/'>Home</Link>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default DemoPage

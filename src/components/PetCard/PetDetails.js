@@ -15,7 +15,7 @@ const PetDetails = () => {
     const onPetButtonClickHandler = () => {
         console.log('updateCounterHandler');
 
-        const incrementedLikes = pet.likes + 1
+        const incrementedLikes = Number(pet.likes) + 1
         petService.updateCounter(petId, incrementedLikes)
             .then(updatedPet => {
                 setPet(updatedPet)
