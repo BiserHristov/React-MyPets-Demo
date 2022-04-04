@@ -21,6 +21,14 @@ class Categories extends Component {
     componentDidMount() {
         petsService.getAll()
             .then(res => this.setState({ pets: res }))
+
+        // const number = Math.random();
+        // console.log('The number is: ', number);
+
+        // if (number > 0.7) {
+
+        //     throw new Error('Something is messsed up!')
+        // }
     }
 
     componentDidUpdate(prevProps) {
@@ -35,6 +43,16 @@ class Categories extends Component {
                 this.setState({ pets: res })
             })
 
+    }
+
+    increaseLikes(petId, likes) {
+        let increasedLikes = likes + 1;
+
+        petsService.updateCounter(petId, increasedLikes)
+            .then(updatedPet => {
+                this.setState(oldState => ({ pets: (oldState.pets.map(x => x.id === petId ? { ...x, likes: updatedPet.likes } : x)) }))
+                // setPet(oldState => ({ ...oldState, likes: incrementedLikes }))
+            })
     }
 
     render() {
@@ -54,6 +72,7 @@ class Categories extends Component {
                         {this.state.pets.map(p => <PetCard
                             key={p.id}
                             pet={p}
+                            increaseLikes={this.increaseLikes.bind(this, p.id, p.likes)}
                         />)}
                     </ul>
                 </section>

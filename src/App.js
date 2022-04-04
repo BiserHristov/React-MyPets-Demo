@@ -15,6 +15,7 @@ import './App.css';
 import Logout from './Logout/Logout';
 import Register from './components/Register/Register';
 import { useEffect, useState } from 'react';
+import CustomErrorBoundry from './components/CustomErrorBoundry/CustomErrorBoundry';
 
 function App() {
   console.log(process.env.NODE_ENV);
@@ -25,28 +26,35 @@ function App() {
     firebase.auth().onAuthStateChanged(setUser);
   }, [])
 
+  // const authInfo = {
+  //   isAuthenticated: Boolean(user),
+  //   email: user.email
+  // }
+
   return (
     <div className="container">
       <Header email={user?.email} isAuthenticated={Boolean(user)} />
       <h1>Email: {user?.email}</h1>
-      <Routes>
-        <Route path='/' element={<Categories />} >
-          <Route path='categories/:category' element={<Categories />} />
-        </Route>
-        <Route path='pets/:petId/details' element={<PetDetails />} />
-        <Route path='pets/:petId/edit' element={<EditPetDetails />} />
-        <Route path='pets/details/:petId/edit' element={<EditPet />} />
-        <Route path='login' element={<Login />} />
-        <Route path='logout' element={<Logout />} />
-        <Route path='register' element={<Register />} />
+      <CustomErrorBoundry>
+        <Routes>
+          <Route path='/' element={<Categories />} >
+            <Route path='categories/:category' element={<Categories />} />
+          </Route>
+          <Route path='pets/:petId/details' element={<PetDetails />} />
+          <Route path='pets/:petId/edit' element={<EditPetDetails />} />
+          <Route path='pets/details/:petId/edit' element={<EditPet />} />
+          <Route path='login' element={<Login />} />
+          <Route path='logout' element={<Logout />} />
+          <Route path='register' element={<Register />} />
 
 
-        <Route path='pets/create' element={<CreatePet />} />
+          <Route path='pets/create' element={<CreatePet />} />
 
 
-        <Route path='demo' element={<DemoPage />} />
+          <Route path='demo' element={<DemoPage />} />
 
-      </Routes>
+        </Routes>
+      </CustomErrorBoundry>
       <Footer />
     </div>
   );

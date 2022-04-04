@@ -7,6 +7,7 @@ export const getAll = (category = '') => {
 
     return fetch(petsURL)
         .then(res => res.json())
+        .then(res => res.map(x => ({ ...x, likes: Number(x.likes) })))
         .catch(error => console.log(error))
 };
 
@@ -59,7 +60,7 @@ export const updateCounter = (petId, incrementedLikes) => {
         id: petId,
         likes: incrementedLikes
     }
-  
+
 
     return fetch(url + `/${petId}`, {
         method: 'PATCH',
